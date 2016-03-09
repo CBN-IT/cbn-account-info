@@ -1,0 +1,115 @@
+<link rel="import" href="../polymer/polymer.html">
+
+<link rel="import" href="../paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../paper-material/paper-material.html">
+<link rel="import" href="../paper-button/paper-button.html">
+<link rel="import" href="../iron-dropdown/iron-dropdown.html">
+<link rel="import" href="../iron-image/iron-image.html">
+<link rel="import" href="../iron-flex-layout/iron-flex-layout.html">
+
+
+<dom-module id="cbn-account-info">
+	<template>
+		<style>
+			.accountInfo {
+				@apply(--layout-horizontal);
+				margin: 14px;
+			}
+
+			.image-account {
+				width: 96px;
+				height: 96px;
+				margin: 0px;
+				background-position: center;
+			}
+
+			.account .content {
+				padding: 0px 0px;
+			}
+
+			.account {
+				padding: 2px 5px;
+				background: #4285f4;
+				color: #fff;
+			}
+
+			.accountInfo section{
+				text-align: center;
+			}
+
+			.accountInfo a{
+				color: white;
+			}
+
+			.accountInfo div{
+				color:#000000;
+				margin-left: 10px;
+				text-align:center;
+			}
+
+			.buttons-cont-info{
+				margin-top:25px;
+			}
+
+			#accountInfo{
+				width:350px;
+				height:124px;
+				top:56px;
+				background-color: #ffffff
+			}
+		</style>
+		<paper-icon-button icon="account-box" on-click="open"></paper-icon-button>
+		<iron-dropdown id="accountInfo" horizontal-align="right" vertical-align="bottom" style="width:350px;height:124px;top:56px;background-color: #ffffff">
+			<paper-material class="dropdown-content layout horizontal" style="color:black;">
+				<section class="accountInfo">
+					<div class="image-account">
+						<iron-image src="/images/photo.jpg"></iron-image>
+					</div>
+					<section layout vertical>
+						<div style="color:#000000;margin-left: 10px;text-align:center">{{cont.prenume}} {{cont.nume}}
+							<br/><span>{{email}}</span>
+						</div>
+						<section class="layout horizontal" style="margin-top:25px">
+							<section class="flex 1" style="text-align: center">
+								<paper-button class="account">
+									<a href="/disconnect?redirect_to=/" style="color: #fff;">Logout</a>
+								</paper-button>
+							</section>
+							<section class="flex 1" style="text-align: center">
+								<paper-button class="account">Edit</paper-button>
+							</section>
+						</section>
+					</section>
+				</section>
+			</paper-material>
+		</iron-dropdown>
+	</template>
+</dom-module>
+
+<script>
+	(function () {
+		Polymer({
+
+			is: 'cbn-account-info',
+			behaviors: [],
+			properties: {
+				cont:{
+					type:Object,
+					value: function(){
+						return {};
+					}
+				},
+				email:{
+					type: String,
+					notify:true,
+					value: function () {
+						return window.namespace;
+					}
+				}
+			},
+			listeners: {},
+			ready: function () {
+			}
+		})
+	})();
+</script>
