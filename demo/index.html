@@ -1,0 +1,25 @@
+<link rel="import" href="../../polymer/polymer.html">
+
+<link rel="import" href="../../cbn-main-page/cbn-main-page.html">
+<link rel="import" href="../cbn-account-info.html">
+
+<!-- Neon elements -->
+
+
+<!-- Other imports-->
+
+<dom-module id="cbn-app">
+	<template>
+		<cbn-main-page route-section="{{routeSection}}" id="mainPage">
+			<div class="title toolbar" style="flex:1;"></div>
+			<cbn-account-info cont="{{cont}}" email="{{email}}" class="toolbar"></cbn-account-info>
+		</cbn-main-page>
+	</template>
+</dom-module>
+
+<script>
+	Polymer({
+		is: 'cbn-app'
+	});
+</script>
+<cbn-app></cbn-app>
