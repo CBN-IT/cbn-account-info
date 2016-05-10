@@ -134,6 +134,7 @@
 			},
 			fireEdit:function(){
 				this.fire("cbn-edit-account",this.cont);
+				this.$.accountInfo.close();
 			},
 			_getPic:function(){
 				if (this.cont && this.cont.pozaContBlobKey) {
