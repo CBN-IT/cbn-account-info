@@ -59,7 +59,12 @@
 			}
 		</style>
 		<paper-icon-button icon="account-box" on-click="open"></paper-icon-button>
-		<iron-dropdown id="accountInfo" horizontal-align="right" vertical-align="bottom" style="width:350px;height:124px;top:56px;background-color: #ffffff">
+		<iron-dropdown 
+			id="accountInfo" 
+			horizontal-align="right" 
+			vertical-align="top"
+			style="width:350px;height:124px;margin-top:47px;background-color: #ffffff"
+			always-on-top>
 			<paper-material class="dropdown-content layout horizontal" style="color:black;">
 				<section class="accountInfo">
 					<div class="image-account">
@@ -76,7 +81,7 @@
 								</paper-button>
 							</section>
 							<section class="flex 1" style="text-align: center">
-								<paper-button class="account">Edit</paper-button>
+								<paper-button class="account" on-tap="fireEdit">Edit</paper-button>
 							</section>
 						</section>
 					</section>
@@ -116,6 +121,9 @@
 			},
 			open:function(){
 				this.$.accountInfo.open();
+			},
+			fireEdit:function(){
+				this.fire("cbn-edit-account",this.cont);
 			}
 		})
 	})();
