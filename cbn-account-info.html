@@ -68,7 +68,7 @@
 			<paper-material class="dropdown-content layout horizontal" style="color:black;">
 				<section class="accountInfo">
 					<div class="image-account">
-						<iron-image src="[[photo]]"></iron-image>
+						<iron-image src="[[_photo]]"></iron-image>
 					</div>
 					<section layout vertical>
 						<div style="color:#000000;margin-left: 10px;text-align:center">{{cont.prenume}} {{cont.nume}}
@@ -98,15 +98,15 @@
 			is: 'cbn-account-info',
 			behaviors: [],
 			properties: {
-				cont:{
-					type:Object,
-					value: function(){
+				cont: {
+					type: Object,
+					value: function () {
 						return {};
 					}
 				},
-				email:{
+				email: {
 					type: String,
-					notify:true,
+					notify: true,
 					value: function () {
 						return window.namespace;
 					}
@@ -114,16 +114,33 @@
 				photo:{
 					type:String,
 					value:"/images/photo.jpg"
+				},
+				_photo:{
+					type:String
 				}
 			},
+			observers:[
+				"_getPic(photo)",
+				"_getPic(cont.pozaContBlobKey)"
+			],
 			listeners: {},
 			ready: function () {
+			},
+			attached:function(){
+					
 			},
 			open:function(){
 				this.$.accountInfo.open();
 			},
 			fireEdit:function(){
 				this.fire("cbn-edit-account",this.cont);
+			},
+			_getPic:function(){
+				if (this.cont && this.cont.pozaContBlobKey) {
+					this._photo = "/download/ServeFile?blobKey=" + this.cont.pozaContBlobKey;
+				} else {
+					this._photo = this.photo;
+				}
 			}
 		})
 	})();
