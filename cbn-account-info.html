@@ -57,6 +57,9 @@
 				top:56px;
 				background-color: #ffffff
 			}
+			[hidden]{
+				display: none!important;
+			}
 		</style>
 		<paper-icon-button icon="account-box" on-click="open"></paper-icon-button>
 		<iron-dropdown 
@@ -77,10 +80,10 @@
 						<section class="layout horizontal" style="margin-top:25px">
 							<section class="flex 1" style="text-align: center">
 								<paper-button class="account">
-									<a href="/disconnect?redirect_to=/" style="color: #fff;">Logout</a>
+									<a href$="[[logoutUrl]]" style="color: #fff;">Logout</a>
 								</paper-button>
 							</section>
-							<section class="flex 1" style="text-align: center">
+							<section class="flex 1" style="text-align: center" hidden$="[[hideEdit]]">
 								<paper-button class="account" on-tap="fireEdit">Edit</paper-button>
 							</section>
 						</section>
@@ -107,9 +110,7 @@
 				email: {
 					type: String,
 					notify: true,
-					value: function () {
-						return window.namespace;
-					}
+					value: ""
 				},
 				photo:{
 					type:String,
@@ -117,6 +118,14 @@
 				},
 				_photo:{
 					type:String
+				},
+				logoutUrl:{
+					type:String,
+					value:"/disconnect?redirect_to=/"
+				},
+				hideEdit:{
+					type:Boolean,
+					value:false
 				}
 			},
 			observers:[
