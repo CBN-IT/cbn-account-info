@@ -11,6 +11,7 @@
 
 <dom-module id="cbn-account-info">
 	<template strip-whitespace>
+		<style include="iron-flex"></style>
 		<style>
 			.accountInfo {
 				@apply(--layout-horizontal);
@@ -62,7 +63,6 @@
 				display: none!important;
 			}
 		</style>
-		<style include="iron-flex"></style>
 		<paper-icon-button icon="account-box" on-click="open"></paper-icon-button>
 		<iron-dropdown 
 			id="accountInfo" 
