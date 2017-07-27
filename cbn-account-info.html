@@ -82,7 +82,7 @@
 						<section class="layout horizontal" style="margin-top:25px">
 							<section class="flex 1" style="text-align: center">
 								<paper-button class="account">
-									<a href$="[[logoutUrl]]" style="color: #fff;">Logout</a>
+									<a href$="[[logoutUrl]]" on-click="_logoutClick" style="color: #fff;">Logout</a>
 								</paper-button>
 							</section>
 							<section class="flex 1" style="text-align: center" hidden$="[[hideEdit]]">
@@ -152,6 +152,18 @@
 					this._photo = "/download/ServeFile?blobKey=" + this.cont.pozaContBlobKey;
 				} else {
 					this._photo = this.photo;
+				}
+			},
+			_logoutClick:function(e){
+				var ev = this.fire("logout", {
+					url:this.url
+				}, {
+					cancelable: true,
+					bubbles: true,
+					node: this
+				});
+				if (ev.defaultPrevented) {
+					event.preventDefault();
 				}
 			}
 		})

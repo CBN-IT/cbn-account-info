@@ -36,5 +36,36 @@
 			}
 		}
 	});
+	function exitSipPhone() {
+		runHandlerInIFrame('set-sip:EXIT');
+	}
+	function runHandlerInIFrame(uri) {
+		if (!uri) return false;
+		var url = uri;
+		if (window.location.protocol === "https:") {
+			url = '/utils/SelfRedirect?to=' + encodeURI(uri);
+		}
+		var iframe = document.getElementById('urlHandlerIframe');
+		if (!iframe) {
+			iframe = document.createElement('iframe');
+			iframe.setAttribute('id', 'urlHandlerIframe');
+			iframe.style.position = 'absolute';
+			iframe.style.left = '-999px';
+			iframe.style.visibility = 'hidden';
+			iframe.src = url;
+			document.body.appendChild(iframe);
+
+		} else {
+			iframe.src = url;
+		}
+		return true;
+	}
+	document.body.addEventListener("logout",function(e){
+		exitSipPhone();
+		e.preventDefault();
+		setTimeout(function(){
+			window.location=e.detail.url;	
+		},200)
+	});
 </script>
 <cbn-app></cbn-app>
