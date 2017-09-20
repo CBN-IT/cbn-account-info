@@ -82,11 +82,15 @@
 						<section class="layout horizontal" style="margin-top:25px">
 							<section class="flex 1" style="text-align: center">
 								<paper-button class="account">
-									<a href$="[[logoutUrl]]" on-click="_logoutClick" style="color: #fff;">Logout</a>
+									<a href$="[[logoutUrl]]" on-click="_logoutClick" style="color: #fff;">
+										{{_computedLanguage(selectedLanguage,"logout")}}
+									</a>
 								</paper-button>
 							</section>
 							<section class="flex 1" style="text-align: center" hidden$="[[hideEdit]]">
-								<paper-button class="account" on-tap="fireEdit">Edit</paper-button>
+								<paper-button class="account" on-tap="fireEdit">
+									{{_computedLanguage(selectedLanguage,"edit")}}
+								</paper-button>
 							</section>
 						</section>
 					</section>
@@ -101,7 +105,9 @@
 		Polymer({
 
 			is: 'cbn-account-info',
-			behaviors: [],
+			behaviors: [
+				Cbn.facturi.languageBehavior
+			],
 			properties: {
 				cont: {
 					type: Object,
@@ -128,6 +134,13 @@
 				hideEdit:{
 					type:Boolean,
 					value:false
+				},
+				resources: {
+					type: Object,
+					value: {
+						"logout":"Logout",
+						"edit": "Edit"
+					}
 				}
 			},
 			observers:[
