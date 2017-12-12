@@ -1,0 +1,137 @@
+<link rel="import" href="../polymer/polymer-element.html">
+<link rel="import" href="../iron-icon/iron-icon.html">
+<link rel="import" href="../iron-icons/iron-icons.html">
+<link rel="import" href="../iron-image/iron-image.html">
+<link rel="import" href="../iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="../paper-menu-button/paper-menu-button.html">
+<link rel="import" href="../paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../paper-button/paper-button.html">
+
+<dom-module id="cbn-account-info">
+    <template>
+        <style include="iron-flex"></style>
+        <style>
+            :host {
+                display: block;
+            }
+
+            .account-info {
+                margin: 14px;
+            }
+
+            a{
+                color: white;
+            }
+            .image-account {
+                width: 96px;
+                height: 96px;
+                margin: 0px;
+                background-position: center;
+            }
+
+            .account {
+                padding: 2px 5px;
+                background: #4285f4;
+                color: #fff;
+            }
+
+            .info-content {
+                text-align: center;
+                padding: 0 10px
+            }
+
+            paper-button {
+                margin: 25px auto auto;
+            }
+        </style>
+        <paper-menu-button no-animations no-overlap>
+            <paper-icon-button icon="account-box" slot="dropdown-trigger" alt="menu"></paper-icon-button>
+            <section slot="dropdown-content" class="account-info horizontal layout">
+                <div class="image-account">
+                    <iron-image src="{{photo}}"></iron-image>
+                </div>
+                <div layout vertical class="info-content">
+                    <div class="flex">
+                        <div>{{cont.prenume}} {{cont.nume}}</div>
+                        <div>{{cont.emailCont}}</div>
+                    </div>
+                    <div class="layout horizontal">
+                        <paper-button class="account">
+                            <a href$="{{logoutUrl}}" on-click="logout">
+                                LOGOUT
+                            </a>
+                        </paper-button>
+                        <paper-button class="account" on-tap="editAccount" hidden$="[[hideEdit]]">
+                            EDIT
+                        </paper-button>
+                    </div>
+                </div>
+            </section>
+        </paper-menu-button>
+    </template>
+
+    <script>
+        /**
+         * `cbn-account-info`
+         *
+         *
+         * @customElement
+         * @polymer
+         * @demo demo/index.html
+         */
+        class CbnAccountInfo extends Polymer.Element {
+            static get is() {
+                return 'cbn-account-info';
+            }
+
+            static get properties() {
+                return {
+                    cont: {
+                        type: Object,
+                        value: function () {
+                            return window.cont != undefined ? window.cont : {
+                                    "prenume": "Octavian",
+                                    "nume": "Voloaca",
+                                    "emailCont": "octavianvoloaca@gmail.com"
+                                }
+                        }
+                    },
+                    photo: {
+                        type: String,
+                        value: "images/photo.jpg"
+                    },
+                    logoutUrl: {
+                        type: String,
+                        value: "/disconnect?redirect_to=/"
+                    },
+                    hideEdit: {
+                        type: Boolean,
+                        value: false
+                    }
+                };
+            }
+
+            editAccount() {
+                this.dispatchEvent(new CustomEvent('cbn-edit-account', {
+                    bubbles: true,
+                    composed: true
+                }));
+            }
+
+            logout(e) {
+                let ev = this.fire("logout", {
+                    logoutUrl: this.logoutUrl
+                }, {
+                    cancelable: true,
+                    bubbles: true,
+                    node: this
+                });
+                if (ev.defaultPrevented) {
+                    event.preventDefault();
+                }
+            }
+        }
+
+        window.customElements.define(CbnAccountInfo.is, CbnAccountInfo);
+    </script>
+</dom-module>
