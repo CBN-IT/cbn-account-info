@@ -16,6 +16,9 @@
             }
             paper-menu-button{
                 padding: 0 8px;
+                --paper-menu-button-dropdown:{
+                    min-width: 330px;
+                };
             }
             .account-info {
                 margin: 14px;
@@ -27,7 +30,7 @@
             .image-account {
                 width: 96px;
                 height: 96px;
-                margin: 0px;
+                margin: 0;
                 background-position: center;
             }
 
@@ -38,23 +41,25 @@
             }
 
             .info-content {
+                color: black;
                 text-align: center;
-                padding: 0 10px
+                padding: 0 10px;
+                font-size: 14px;
             }
 
             paper-button {
                 margin: 25px auto auto;
             }
         </style>
-        <paper-menu-button no-animations no-overlap>
+        <paper-menu-button no-animations no-overlap horizontal-align="right" dynamic-align>
             <paper-icon-button icon="account-box" slot="dropdown-trigger" alt="menu"></paper-icon-button>
             <section slot="dropdown-content" class="account-info horizontal layout">
                 <div class="image-account">
                     <iron-image src="{{photo}}"></iron-image>
                 </div>
-                <div layout vertical class="info-content">
+                <div class="info-content flex">
                     <div class="flex">
-                        <div>{{cont.prenume}} {{cont.nume}}</div>
+                        <div>{{cont.prenume}} {{cont.nume}}dgdfg</div>
                         <div>{{cont.emailCont}}</div>
                     </div>
                     <div class="layout horizontal">
@@ -91,11 +96,7 @@
                     cont: {
                         type: Object,
                         value: function () {
-                            return window.cont != undefined ? window.cont : {
-                                    "prenume": "Octavian",
-                                    "nume": "Voloaca",
-                                    "emailCont": "octavianvoloaca@gmail.com"
-                                }
+                            return window.cont != undefined ? window.cont : {}
                         }
                     },
                     photo: {
@@ -121,16 +122,7 @@
             }
 
             logout(e) {
-                let ev = this.fire("logout", {
-                    logoutUrl: this.logoutUrl
-                }, {
-                    cancelable: true,
-                    bubbles: true,
-                    node: this
-                });
-                if (ev.defaultPrevented) {
-                    event.preventDefault();
-                }
+
             }
         }
 
