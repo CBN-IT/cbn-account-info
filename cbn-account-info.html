@@ -66,11 +66,11 @@
                     <div class="layout horizontal">
                         <paper-button class="account">
                             <a href$="{{logoutUrl}}" on-click="logout">
-                                LOGOUT
+                                {{i18n.logout}}
                             </a>
                         </paper-button>
                         <paper-button class="account" on-tap="editAccount" hidden$="[[hideEdit]]">
-                            EDIT
+                            {{i18n.edit}}
                         </paper-button>
                     </div>
                 </div>
@@ -111,6 +111,22 @@
                     hideEdit: {
                         type: Boolean,
                         value: false
+                    },
+                    i18n: {
+                        type: Object,
+                        value: function () {
+                            if (window.i18n != undefined) {
+                                return {
+                                    "logout": window.i18n["logout"],
+                                    "edit": window.i18n["edit"]
+                                }
+                            } else {
+                                return {
+                                    "logout": "logout",
+                                    "edit": "edit"
+                                }
+                            }
+                        }
                     }
                 };
             }
