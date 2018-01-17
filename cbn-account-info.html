@@ -4,12 +4,12 @@
 <link rel="import" href="../iron-image/iron-image.html">
 <link rel="import" href="../iron-flex-layout/iron-flex-layout-classes.html">
 <link rel="import" href="../paper-menu-button/paper-menu-button.html">
-<link rel="import" href="../paper-icon-button/paper-icon-button.html">
-<link rel="import" href="../paper-button/paper-button.html">
+<link rel="import" href="../cbn-btn-styles/cbn-btn-styles.html">
+
 
 <dom-module id="cbn-account-info">
     <template>
-        <style include="iron-flex"></style>
+        <style include="iron-flex cbn-btn-styles"></style>
         <style>
             :host {
                 display: block;
@@ -35,12 +35,6 @@
                 background-position: center;
             }
 
-            .account {
-                padding: 2px 5px;
-                background: #4285f4;
-                color: #fff;
-            }
-
             .info-content {
                 color: black;
                 text-align: center;
@@ -48,12 +42,14 @@
                 font-size: 14px;
             }
 
-            paper-button {
+            .info-content button {
                 margin: 25px auto auto;
             }
         </style>
         <paper-menu-button no-animations no-overlap horizontal-align="right">
-            <paper-icon-button icon="account-box" slot="dropdown-trigger" alt="menu"></paper-icon-button>
+            <button slot="dropdown-trigger" class="icon-btn big-btn ripple" alt="menu">
+                <iron-icon icon="account-box"></iron-icon>
+            </button>
             <section slot="dropdown-content" class="account-info horizontal layout">
                 <div class="image-account">
                     <iron-image src="{{photo}}"></iron-image>
@@ -64,14 +60,14 @@
                         <div>{{cont.emailCont}}</div>
                     </div>
                     <div class="layout horizontal">
-                        <paper-button class="account">
+                        <button class="icon-btn blue background">
                             <a href$="{{logoutUrl}}" on-click="logout">
                                 {{i18n.logout}}
                             </a>
-                        </paper-button>
-                        <paper-button class="account" on-tap="editAccount" hidden$="[[hideEdit]]">
+                        </button>
+                        <button class="icon-btn blue background">
                             {{i18n.edit}}
-                        </paper-button>
+                        </button>
                     </div>
                 </div>
             </section>
